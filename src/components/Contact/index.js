@@ -4,6 +4,7 @@ import { useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import { Snackbar } from '@mui/material';
 
+
 const Container = styled.div`
 display: flex;
 flex-direction: column;
@@ -110,7 +111,7 @@ const ContactButton = styled.input`
   background: hsla(271, 100%, 50%, 1);
   background: linear-gradient(225deg, hsla(271, 100%, 50%, 1) 0%, hsla(294, 100%, 50%, 1) 100%);
   background: -moz-linear-gradient(225deg, hsla(271, 100%, 50%, 1) 0%, hsla(294, 100%, 50%, 1) 100%);
-  background: -webkit-linear-gradient(225deg, hsla(271, 100%, 50%, 1) 0%, hsla(294, 100%, 50%, 1) 100%);
+  background: -webkit-linear-gradient(225deg, #306ee8 0%, #5ab2ff 100%);
   padding: 13px 16px;
   margin-top: 2px;
   border-radius: 12px;
@@ -118,41 +119,46 @@ const ContactButton = styled.input`
   color: ${({ theme }) => theme.text_primary};
   font-size: 18px;
   font-weight: 600;
+  cursor: pointer;
 `
-
-
 
 const Contact = () => {
 
   //hooks
+  const [loading, setLoading] = React.useState(false)
   const [open, setOpen] = React.useState(false);
   const form = useRef();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    emailjs.sendForm('service_tox7kqs', 'template_nv7k7mj', form.current, 'SybVGsYS52j2TfLbi')
+    setLoading(true)
+    emailjs.sendForm('service_fouo6qk', 'template_8ukr1iy', form.current, 'O66JMh6OXgBWkQjX5')
       .then((result) => {
         setOpen(true);
         form.current.reset();
       }, (error) => {
         console.log(error.text);
       });
+
+      setTimeout(() => {
+        setLoading(false)
+      },3000)
   }
-
-
 
   return (
     <Container>
       <Wrapper>
-        <Title>Contact</Title>
-        <Desc>Feel free to reach out to me for any questions or opportunities!</Desc>
+        <Title>Bog'lanish</Title>
+        <Desc>Har qanday savol yoki imkoniyatlar uchun men bilan bog'laning!</Desc>
         <ContactForm ref={form} onSubmit={handleSubmit}>
           <ContactTitle>Email Me 🚀</ContactTitle>
-          <ContactInput placeholder="Your Email" name="from_email" />
-          <ContactInput placeholder="Your Name" name="from_name" />
+          <ContactInput placeholder="Your Email" type="email" name="from_email" />
+          <ContactInput placeholder="Your Name" type="text" name="from_name" />
           <ContactInput placeholder="Subject" name="subject" />
           <ContactInputMessage placeholder="Message" rows="4" name="message" />
-          <ContactButton type="submit" value="Send" />
+          {
+            loading ? <ContactButton type="submit" value="Loading"/> : <ContactButton type="submit" value="Yuborish"/>
+          }
         </ContactForm>
         <Snackbar
           open={open}

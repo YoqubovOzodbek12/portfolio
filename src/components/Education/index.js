@@ -81,9 +81,9 @@ const index = () => {
     return (
         <Container id="education">
             <Wrapper>
-                <Title>Education</Title>
+                <Title>Talim</Title>
                 <Desc>
-                    My education has been a journey of self-discovery and growth. My educational details are as follows.
+                Mening ta'lim o'z-o'zini kashf qilish va o'sish sayohati bo'ldi. Mening ta'lim haqidagi ma'lumotlarim quyidagicha.
                 </Desc>
                 <TimelineSection>
                     <Timeline>
@@ -94,7 +94,7 @@ const index = () => {
                                 </TimelineContent>
                                 <TimelineSeparator>
                                     <TimelineDot variant="outlined" color="secondary" />
-                                    {index !== experiences.length  && <TimelineConnector style={{ background: '#854CE6' }} />}
+                                    {index !== experiences.length  && <TimelineConnector style={{ background: '#306ee8' }} />}
                                 </TimelineSeparator>
                             </TimelineItem>
                         ))}

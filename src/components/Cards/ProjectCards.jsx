@@ -19,7 +19,6 @@ const Card = styled.div`
     width: 330px;
     height: 490px;
     background-color: ${({ theme }) => theme.card};
-    cursor: pointer;
     border-radius: 10px;
     box-shadow: 0 0 12px 4px rgba(0,0,0,0.4);
     overflow: hidden;
@@ -35,6 +34,13 @@ const Card = styled.div`
     }
     &:hover ${Button} {
         display: block;
+    }
+
+    .anchor {
+        color: #fff;
+        text-decoration: none;
+        font-size: 22px;
+        padding-top: 18px;
     }
 `
 
@@ -122,26 +128,22 @@ const Avatar = styled.img`
     border: 3px solid ${({ theme }) => theme.card};
 `
 
-const ProjectCards = ({project,setOpenModal}) => {
+const ProjectCards = ({ project }) => {
     return (
-        <Card onClick={() => setOpenModal({state: true, project: project})}>
-            <Image src={project.image}/>
+        <Card>
+            <Image src={project.image} />
             <Tags>
                 {project.tags?.map((tag, index) => (
-                <Tag>{tag}</Tag>
+                    <Tag>{tag}</Tag>
                 ))}
             </Tags>
             <Details>
                 <Title>{project.title}</Title>
                 <Date>{project.date}</Date>
                 <Description>{project.description}</Description>
+                <a className='anchor' href={project.netlify} target="_blank">Netlify</a>
+                <a className='anchor' href={project.github} target="_blank">Github</a>
             </Details>
-            <Members>
-                {project.member?.map((member) => (
-                    <Avatar src={member.img}/>
-                ))}
-            </Members>
-            {/* <Button>View Project</Button> */}
         </Card>
     )
 }
